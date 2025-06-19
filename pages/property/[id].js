@@ -4,7 +4,9 @@ import { GoVerified } from 'react-icons/go';
 import millify from 'millify';
 
 import { baseUrl, fetchApi } from '@/utils/fetchApi';
-import ImageScrollbar from '@/components/ImageScrollbar';
+import dynamic from 'next/dynamic';
+
+const ImageScrollbar = dynamic(() => import('@/components/ImageScrollbar'), { ssr: false });
 
 const PropertyDetails = ({ propertyDetails: { price, rentFrequency, rooms, title, baths, area, agency, isVerified, description, type, purpose, furnishingStatus, amenities, photos } }) => (
     <Box maxWidth='1000px' margin='auto' p='4'>
@@ -20,7 +22,7 @@ const PropertyDetails = ({ propertyDetails: { price, rentFrequency, rooms, title
                 <Spacer />
                 <Box>
                     <Avatar size='sm' src={agency?.logo?.url}></Avatar>
-                    </Box>
+                </Box>
             </Flex>
             <Flex alignItems='center' p='1' justifyContent='space-between' w='250px' color='blue.400'>
                 {rooms}<FaBed /> | {baths} <FaBath /> | {millify(area)} sqft <BsGridFill />
@@ -66,9 +68,5 @@ export default PropertyDetails;
 export async function getServerSideProps({ params: { id } }) {
     const data = await fetchApi(`${baseUrl}/properties/detail?externalID=${id}`);
 
-    return {
-        props: {
-            propertyDetails: data,
-        },
-    };
+    return { props: { propertyDetails: data }, revalidate: 3600 };
 }

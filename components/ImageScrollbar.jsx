@@ -6,6 +6,7 @@ import { Box, Icon, Flex } from '@chakra-ui/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import dynamic from 'next/dynamic';
 
 
 export default function ImageScrollbar({ data }) {

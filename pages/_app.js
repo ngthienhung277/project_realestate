@@ -1,6 +1,6 @@
 
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from "../pages/theme";
+import theme from "../utils/theme";
 import Router from "next/router";
 import NProgress from "nprogress";
 import Head from "next/head";

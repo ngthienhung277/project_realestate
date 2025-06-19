@@ -60,6 +60,7 @@ export async function getStaticProps() {
       propertiesForSale: propertyForSale?.hits,
       propertiesForRent: propertyForRent?.hits,
     },
+    revalidate: 3600,
   };
 }
 
